@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORFX — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <div class="dashboard-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+
+      <div class="sidebar-logo">
+        <div class="logo-icon">📈</div>
+        <div>
+          <span class="logo-text">FORFX</span>
+          <span class="logo-tagline">Marketing Suite</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Overview</div>
+        <nav>
+          <div class="nav-item active" onclick="setActive(this, 'Dashboard')">
+            <span class="nav-icon">🏠</span> Dashboard
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Analytics')">
+            <span class="nav-icon">📊</span> Analytics
+            <span class="nav-badge">Live</span>
+          </div>
+        </nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Campaigns</div>
+        <nav>
+          <div class="nav-item" onclick="setActive(this, 'All Campaigns')">
+            <span class="nav-icon">🚀</span> All Campaigns
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Create Campaign')">
+            <span class="nav-icon">✨</span> Create Campaign
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'A/B Testing')">
+            <span class="nav-icon">🧪</span> A/B Testing
+          </div>
+        </nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Content</div>
+        <nav>
+          <div class="nav-item" onclick="setActive(this, 'Content Calendar')">
+            <span class="nav-icon">📅</span> Content Calendar
+            <span class="nav-badge">3</span>
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Post Library')">
+            <span class="nav-icon">🖼️</span> Post Library
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Media Assets')">
+            <span class="nav-icon">🎨</span> Media Assets
+          </div>
+        </nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Social Media</div>
+        <nav>
+          <div class="nav-item" onclick="setActive(this, 'Instagram')">
+            <span class="nav-icon">📸</span> Instagram
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'LinkedIn')">
+            <span class="nav-icon">💼</span> LinkedIn
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'X / Twitter')">
+            <span class="nav-icon">𝕏</span> X / Twitter
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Telegram')">
+            <span class="nav-icon">💬</span> Telegram
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'YouTube')">
+            <span class="nav-icon">▶️</span> YouTube
+          </div>
+        </nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Growth</div>
+        <nav>
+          <div class="nav-item" onclick="setActive(this, 'Lead Generation')">
+            <span class="nav-icon">🎯</span> Lead Generation
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Audience Insights')">
+            <span class="nav-icon">👥</span> Audience Insights
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Influencer Hub')">
+            <span class="nav-icon">⭐</span> Influencer Hub
+          </div>
+        </nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Tools</div>
+        <nav>
+          <div class="nav-item" onclick="setActive(this, 'Reports')">
+            <span class="nav-icon">📄</span> Reports
+          </div>
+          <div class="nav-item" onclick="setActive(this, 'Settings')">
+            <span class="nav-icon">⚙️</span> Settings
+          </div>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-user" id="sidebarUser">
+          <div class="s-avatar" id="sidebarInitials">RM</div>
+          <div class="s-info">
+            <div class="s-name" id="sidebarName">Rojin Meydani</div>
+            <div class="s-role">Social Media Manager</div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ===== MAIN ===== -->
+    <div class="main-content">
+
+      <!-- HEADER -->
+      <header class="header">
+        <div class="header-left">
+          <div class="page-title" id="pageTitle">Dashboard</div>
+          <div class="breadcrumb">
+            <span class="live-dot">Live data</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-date" id="headerDate"></div>
+          <div class="notif-btn" title="Notifications">
+            🔔
+            <div class="notif-dot"></div>
+          </div>
+          <div class="header-avatar">
+            <div class="avatar-img" id="headerInitials">RM</div>
+            <div class="avatar-info">
+              <div class="av-name" id="headerName">Rojin Meydani</div>
+              <div class="av-role">Social Media Manager</div>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+      </header>
+
+      <!-- DASHBOARD CONTENT -->
+      <main class="dashboard-content">
+
+        <!-- WELCOME BANNER -->
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h2>Good <span id="greeting">morning</span>, <span id="welcomeName">Rojin</span> 👋</h2>
+            <p>Here's what's happening with your campaigns and socials today.</p>
+          </div>
+          <div class="welcome-stats">
+            <div class="welcome-stat">
+              <div class="ws-value">3</div>
+              <div class="ws-label">Live Campaigns</div>
+            </div>
+            <div class="welcome-stat">
+              <div class="ws-value">94k</div>
+              <div class="ws-label">Total Reach</div>
+            </div>
+            <div class="welcome-stat">
+              <div class="ws-value">6.4%</div>
+              <div class="ws-label">Avg Engagement</div>
+            </div>
+            <div class="welcome-stat">
+              <div class="ws-value">248</div>
+              <div class="ws-label">Leads This Month</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WIDGETS GRID -->
+        <div class="widgets-grid">
+
+          <!-- WIDGET 1: Campaign Performance -->
+          <div class="widget-card animate-in">
+            <div class="widget-header">
+              <div class="widget-title-group">
+                <div class="widget-title">Campaign Performance</div>
+                <div class="widget-subtitle">3 active · updated just now</div>
+              </div>
+              <div class="widget-icon cyan">🚀</div>
+            </div>
+            <div class="campaign-list">
+
+              <div class="campaign-item">
+                <div class="campaign-meta">
+                  <span class="campaign-name">FORFX Summer Launch</span>
+                  <div class="campaign-meta-right">
+                    <span class="campaign-pct">78%</span>
+                    <span class="status-badge live">Live</span>
+                  </div>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill cyan" style="width:78%"></div>
+                </div>
+              </div>
+
+              <div class="campaign-item">
+                <div class="campaign-meta">
+                  <span class="campaign-name">Prop Account Promo</span>
+                  <div class="campaign-meta-right">
+                    <span class="campaign-pct">55%</span>
+                    <span class="status-badge live">Live</span>
+                  </div>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill gold" style="width:55%"></div>
+                </div>
+              </div>
+
+              <div class="campaign-item">
+                <div class="campaign-meta">
+                  <span class="campaign-name">EUR/USD Education Series</span>
+                  <div class="campaign-meta-right">
+                    <span class="campaign-pct">32%</span>
+                    <span class="status-badge scheduled">Scheduled</span>
+                  </div>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill purple" style="width:32%"></div>
+                </div>
+              </div>
+
+              <div class="campaign-item">
+                <div class="campaign-meta">
+                  <span class="campaign-name">Affiliate Referral Drive</span>
+                  <div class="campaign-meta-right">
+                    <span class="campaign-pct">—</span>
+                    <span class="status-badge draft">Draft</span>
+                  </div>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill green" style="width:8%"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- WIDGET 2: Engagement Rate -->
+          <div class="widget-card gold animate-in">
+            <div class="widget-header">
+              <div class="widget-title-group">
+                <div class="widget-title">Engagement Rate</div>
+                <div class="widget-subtitle">Across all platforms · this week</div>
+              </div>
+              <div class="widget-icon gold">📊</div>
+            </div>
+            <div class="engagement-grid">
+
+              <div class="eng-stat">
+                <div class="eng-value" style="color:var(--accent-cyan)">6.4%</div>
+                <div class="eng-label">Avg Rate</div>
+                <div class="eng-change up">↑ 1.2% vs last week</div>
+              </div>
+
+              <div class="eng-stat">
+                <div class="eng-value" style="color:var(--accent-gold)">94.2k</div>
+                <div class="eng-label">Total Reach</div>
+                <div class="eng-change up">↑ 18% vs last week</div>
+              </div>
+
+              <div class="eng-stat">
+                <div class="eng-value" style="color:var(--accent-green)">4,381</div>
+                <div class="eng-label">Likes</div>
+                <div class="eng-change up">↑ 8%</div>
+              </div>
+
+              <div class="eng-stat">
+                <div class="eng-value" style="color:var(--accent-purple)">1,027</div>
+                <div class="eng-label">Shares</div>
+                <div class="eng-change up">↑ 22%</div>
+              </div>
+
+            </div>
+            <div class="platform-breakdown">
+              <span style="font-size:11px;color:var(--text-muted);margin-right:4px;">Platforms:</span>
+              <span class="platform-tag"><span class="p-dot" style="background:#e1306c"></span>IG 8.1%</span>
+              <span class="platform-tag"><span class="p-dot" style="background:#0077b5"></span>LI 5.3%</span>
+              <span class="platform-tag"><span class="p-dot" style="background:#1da1f2"></span>X 4.8%</span>
+              <span class="platform-tag"><span class="p-dot" style="background:#229ed9"></span>TG 7.2%</span>
+            </div>
+          </div>
+
+          <!-- WIDGET 3: Content Calendar -->
+          <div class="widget-card green animate-in">
+            <div class="widget-header">
+              <div class="widget-title-group">
+                <div class="widget-title">Content Calendar</div>
+                <div class="widget-subtitle">Upcoming scheduled posts</div>
+              </div>
+              <div class="widget-icon green">📅</div>
+            </div>
+            <div class="calendar-list">
+
+              <div class="cal-item">
+                <div class="cal-date">
+                  <div class="cal-day">08</div>
+                  <div class="cal-month">Apr</div>
+                </div>
+                <div class="cal-info">
+                  <div class="cal-title">Forex 101: Reading Candlestick Charts</div>
+                  <div class="cal-platform">📸 Instagram · 🐦 X (Twitter)</div>
+                </div>
+                <div class="cal-time">10:00 AM</div>
+              </div>
+
+              <div class="cal-item">
+                <div class="cal-date">
+                  <div class="cal-day">09</div>
+                  <div class="cal-month">Apr</div>
+                </div>
+                <div class="cal-info">
+                  <div class="cal-title">FORFX Challenge Week — Promo Video</div>
+                  <div class="cal-platform">▶️ YouTube · 💬 Telegram</div>
+                </div>
+                <div class="cal-time">2:00 PM</div>
+              </div>
+
+              <div class="cal-item">
+                <div class="cal-date">
+                  <div class="cal-day">10</div>
+                  <div class="cal-month">Apr</div>
+                </div>
+                <div class="cal-info">
+                  <div class="cal-title">Trader Spotlight: Community Success Story</div>
+                  <div class="cal-platform">💼 LinkedIn · 📸 Instagram</div>
+                </div>
+                <div class="cal-time">9:00 AM</div>
+              </div>
+
+              <div class="cal-item">
+                <div class="cal-date">
+                  <div class="cal-day">11</div>
+                  <div class="cal-month">Apr</div>
+                </div>
+                <div class="cal-info">
+                  <div class="cal-title">Weekly Market Recap Infographic</div>
+                  <div class="cal-platform">📸 Instagram · 💼 LinkedIn</div>
+                </div>
+                <div class="cal-time">5:00 PM</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- WIDGET 4: Lead Generation -->
+          <div class="widget-card purple animate-in">
+            <div class="widget-header">
+              <div class="widget-title-group">
+                <div class="widget-title">Lead Generation</div>
+                <div class="widget-subtitle">Social media sourced · April 2026</div>
+              </div>
+              <div class="widget-icon purple">🎯</div>
+            </div>
+            <div class="leads-summary">
+              <div class="leads-big">248</div>
+              <div class="leads-meta">
+                <div class="leads-label">Total Leads</div>
+                <div class="leads-change">↑ +63 this week</div>
+                <div class="leads-period">vs 185 last month</div>
+              </div>
+            </div>
+            <div class="leads-bars">
+
+              <div class="leads-bar-item">
+                <span class="lb-label">Instagram</span>
+                <div class="lb-bar"><div class="lb-fill" style="width:82%"></div></div>
+                <span class="lb-count">89</span>
+              </div>
+
+              <div class="leads-bar-item">
+                <span class="lb-label">LinkedIn</span>
+                <div class="lb-bar"><div class="lb-fill" style="width:62%"></div></div>
+                <span class="lb-count">67</span>
+              </div>
+
+              <div class="leads-bar-item">
+                <span class="lb-label">Telegram</span>
+                <div class="lb-bar"><div class="lb-fill" style="width:55%"></div></div>
+                <span class="lb-count">59</span>
+              </div>
+
+              <div class="leads-bar-item">
+                <span class="lb-label">X / Twitter</span>
+                <div class="lb-bar"><div class="lb-fill" style="width:30%"></div></div>
+                <span class="lb-count">33</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- /widgets-grid -->
+
+        <!-- BOTTOM SECTION -->
+        <div class="bottom-grid">
+
+          <!-- TOP PERFORMING POSTS -->
+          <div class="widget-card">
+            <div class="widget-header">
+              <div class="widget-title-group">
+                <div class="widget-title">Top Performing Posts</div>
+                <div class="widget-subtitle">Last 30 days · by engagement</div>
+              </div>
+              <div class="widget-icon cyan">⭐</div>
+            </div>
+            <div class="post-list">
+
+              <div class="post-item">
+                <div class="post-rank">#1</div>
+                <div class="post-info">
+                  <div class="post-title">"Why 80% of Retail Traders Fail — And How FORFX Is Different"</div>
+                  <div class="post-meta">📸 Instagram · Apr 2</div>
+                </div>
+                <div class="post-stats">
+                  <span class="ps-eng">9.8% eng.</span>
+                  <span class="ps-reach">32.4k reach</span>
+                </div>
+              </div>
+
+              <div class="post-item">
+                <div class="post-rank">#2</div>
+                <div class="post-info">
+                  <div class="post-title">EUR/USD Live Trade Breakdown — Real P&L Shown</div>
+                  <div class="post-meta">▶️ YouTube Shorts · Mar 28</div>
+                </div>
+                <div class="post-stats">
+                  <span class="ps-eng">8.1% eng.</span>
+                  <span class="ps-reach">21.7k reach</span>
+                </div>
+              </div>
+
+              <div class="post-item">
+                <div class="post-rank">#3</div>
+                <div class="post-info">
+                  <div class="post-title">FORFX Trader of the Month — Community Spotlight</div>
+                  <div class="post-meta">💼 LinkedIn · Mar 25</div>
+                </div>
+                <div class="post-stats">
+                  <span class="ps-eng">7.5% eng.</span>
+                  <span class="ps-reach">18.9k reach</span>
+                </div>
+              </div>
+
+              <div class="post-item">
+                <div class="post-rank">#4</div>
+                <div class="post-info">
+                  <div class="post-title">Top 5 Indicators Every Prop Trader Should Know</div>
+                  <div class="post-meta">📸 Instagram Carousel · Mar 20</div>
+                </div>
+                <div class="post-stats">
+                  <span class="ps-eng">6.9% eng.</span>
+                  <span class="ps-reach">16.2k reach</span>
+                </div>
+              </div>
+
+              <div class="post-item">
+                <div class="post-rank">#5</div>
+                <div class="post-info">
+                  <div class="post-title">Weekend Market Outlook: Gold &amp; USD Watch</div>
+                  <div class="post-meta">💬 Telegram · Apr 5</div>
+                </div>
+                <div class="post-stats">
+                  <span class="ps-eng">6.2% eng.</span>
+                  <span class="ps-reach">14.8k reach</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- QUICK ACTIONS -->
+          <div class="widget-card">
+            <div class="widget-header">
+              <div class="widget-title-group">
+                <div class="widget-title">Quick Actions</div>
+                <div class="widget-subtitle">Common tasks</div>
+              </div>
+              <div class="widget-icon gold">⚡</div>
+            </div>
+            <div class="quick-actions">
+
+              <button class="qa-btn" onclick="showToast('✍️ Post composer opening...')">
+                <div class="qa-icon" style="background:rgba(0,200,255,0.1); font-size:16px;">✍️</div>
+                <div>
+                  <div style="font-weight:600; font-size:13px;">Create New Post</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Schedule across platforms</div>
+                </div>
+                <span class="qa-arrow">›</span>
+              </button>
+
+              <button class="qa-btn" onclick="showToast('📊 Loading analytics report...')">
+                <div class="qa-icon" style="background:rgba(245,158,11,0.1); font-size:16px;">📊</div>
+                <div>
+                  <div style="font-weight:600; font-size:13px;">View Analytics Report</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Full performance breakdown</div>
+                </div>
+                <span class="qa-arrow">›</span>
+              </button>
+
+              <button class="qa-btn" onclick="showToast('🚀 Campaign builder loading...')">
+                <div class="qa-icon" style="background:rgba(139,92,246,0.1); font-size:16px;">🚀</div>
+                <div>
+                  <div style="font-weight:600; font-size:13px;">Launch Campaign</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Multi-platform campaign setup</div>
+                </div>
+                <span class="qa-arrow">›</span>
+              </button>
+
+              <button class="qa-btn" onclick="showToast('📅 Calendar view opening...')">
+                <div class="qa-icon" style="background:rgba(16,185,129,0.1); font-size:16px;">📅</div>
+                <div>
+                  <div style="font-weight:600; font-size:13px;">Manage Calendar</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">View &amp; edit content schedule</div>
+                </div>
+                <span class="qa-arrow">›</span>
+              </button>
+
+              <button class="qa-btn" onclick="showToast('🎯 Lead tracker opening...')">
+                <div class="qa-icon" style="background:rgba(236,72,153,0.1); font-size:16px;">🎯</div>
+                <div>
+                  <div style="font-weight:600; font-size:13px;">Export Lead Report</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:1px;">Download social leads CSV</div>
+                </div>
+                <span class="qa-arrow">›</span>
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- /bottom-grid -->
+
+      </main>
+    </div>
+    <!-- /main-content -->
+
+  </div>
+  <!-- /dashboard-layout -->
+
+  <script src="script.js"></script>
+</body>
+</html>

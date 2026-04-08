@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORFX — Sign Up</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+
+  <div class="bg-grid"></div>
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+
+  <div class="auth-container">
+
+    <div class="auth-logo">
+      <div class="logo-mark">
+        <div class="logo-icon">📈</div>
+        <span class="logo-text">FORFX</span>
+      </div>
+      <div class="logo-sub">Prop Trading · Marketing Suite</div>
+    </div>
+
+    <div class="auth-card">
+      <h2>Create your account</h2>
+      <p class="subtitle">Join the FORFX marketing team dashboard</p>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <div
+        class="error-msg"
+        id="successMsg"
+        style="background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.3);color:#34d399;display:none;"
+      >
+        ✅ Account created! Redirecting to login…
+      </div>
+
+      <form id="signupForm" novalidate>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Rojin Meydani"
+              required
+              autocomplete="name"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉</span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@forfx.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Min. 6 characters"
+              required
+              autocomplete="new-password"
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="registerBtn">
+          Create Account →
+        </button>
+
+      </form>
+
+      <div class="divider"><span>already a member?</span></div>
+
+      <div class="auth-footer">
+        Already have an account?
+        <a href="index.html">Sign in →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
